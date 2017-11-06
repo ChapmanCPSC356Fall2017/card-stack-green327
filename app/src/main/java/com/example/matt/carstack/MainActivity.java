@@ -2,7 +2,6 @@ package com.example.matt.carstack;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.EventLogTags;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity
 
         this.stack = new Stack<>();
 
+        //generates the stack of cards and their suits
         for(int i = 0; i < 4; ++i)//suit
         {
             for(int k = 1; k <= 14; ++k)//value
@@ -50,8 +50,9 @@ public class MainActivity extends AppCompatActivity
                 Log.d(LOGTAG, i + " " + k);
             }
         }
-        Collections.shuffle(this.stack);
+        Collections.shuffle(this.stack);//shuffles the stack
 
+        //onClick listener for the layout as a whole
         this.layout = (RelativeLayout) findViewById(R.id.onClick);
         layout.setOnClickListener(new View.OnClickListener()
         {
@@ -71,9 +72,10 @@ public class MainActivity extends AppCompatActivity
 
     public void nextCard(cardList c)
     {
+        //access values from class c and assigns them for easier accessibility and manipulation
         int suit = c.getSuit();
         int value = c.getValue();
-        Log.d(LOGTAG, suit + " " + value);
+        Log.d(LOGTAG, suit + " " + value);//tracks each card that pops
         if(suit == 0)
         {
             topLeftImage.setImageResource(R.drawable.heart);
@@ -140,6 +142,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    //handles all cards that are not strictly integers
     public void face(int value)
     {
         if (value == 11)
